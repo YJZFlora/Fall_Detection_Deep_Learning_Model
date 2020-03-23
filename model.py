@@ -22,7 +22,7 @@ import pandas as pd
 from google.colab import drive
 drive.mount('/content/drive')
 
-# read json 2-d pose as data, without using: 
+# read json 2-d pose as data, without using:
 #     {15, "REye"},
 #     {16, "LEye"},
 #     {17, "REar"},
@@ -49,14 +49,14 @@ def input_data(basepath):
         else:
           full_pose = people[0].get("pose_keypoints_2d")
           pose_keypoints_2d = full_pose[:45] + full_pose[57:]
-         
+
         pose_keypoints_2d.append(frame.split('.')[0])
-        # each pose_keypoints_2d: 
+        # each pose_keypoints_2d:
         # [431.949, 196.241, 0.0564434, 437.194, 187.749, 0.552267,...'fall-06-cam0_000000000065_keypoints']
-        data.append(pose_keypoints_2d)        
+        data.append(pose_keypoints_2d)
   return data
 
-  
+
 data1 = input_data(basepath1)
 print(len(data1))
 
@@ -86,7 +86,7 @@ read_data(path_of_video)
 target = []
 path1 = '/content/drive/My Drive/636project/target/urfall-cam0-falls.csv'
 path2 = '/content/drive/My Drive/636project/target/urfall-cam0-adls.csv'
-# in these csv of UR dataset, 
+# in these csv of UR dataset,
 # '-1' means person is not lying, '1' means person is lying on the ground; '0' is temporary pose, when person "is falling"
 
 def input_fall(path):
@@ -101,11 +101,11 @@ def input_fall(path):
       label = row[2]
       if label == '1' or label == '0':
         falls += 1
-        record.append(1)        
+        record.append(1)
       else:
         not_fall += 1
         record.append(0)
-      # each record: [<video_id>, <frame_id>, label], eg: ['fall-17', '22', 0] 
+      # each record: [<video_id>, <frame_id>, label], eg: ['fall-17', '22', 0]
       target.append(record)
   print("falls", falls)
   print("not_fall", not_fall)
@@ -130,7 +130,7 @@ print(len(target))
 df = pd.DataFrame.from_records(target)
 df.to_csv (r'/content/drive/My Drive/636project/target_data.csv', index = False, header=False)
 
-# make dictionary of target 
+# make dictionary of target
 target_csv_path = '/content/drive/My Drive/636project/target_data.csv'
 idx = 0
 idx_dict = {}
@@ -138,7 +138,7 @@ idx_dict = {}
 with open(target_csv_path, mode='r') as csv_file:
   reader = csv.reader(csv_file)
   for row in reader:
-    # each row: [<video_id>, <frame_id>, label], eg: ['fall-17', '22', 0] 
+    # each row: [<video_id>, <frame_id>, label], eg: ['fall-17', '22', 0]
     idx_dict['.'.join(row[:2])] = idx  # {'fall-17.22' : 112}
     idx += 1
 
@@ -163,7 +163,7 @@ print(bodylandmark[0])
 print(len(label))
 print(len(bodylandmark))
 
-# normalize data 
+# normalize data
 for record in bodylandmark:
   for i in range(0, 63, 3):
     record[i] = float(record[i])/ 640
@@ -200,13 +200,13 @@ print(df['label'].value_counts())
 from sklearn.utils import resample
 print("begin to re sample...")
 # Upsample minority class
-df_minority_upsampled = resample(df_minority, 
+df_minority_upsampled = resample(df_minority,
                                  replace=True,      # sample with replacement
                                  n_samples=9741)    # to match majority class
-                                  
+
 # Combine majority class with upsampled minority class
 df_upsampled = pd.concat([df_majority, df_minority_upsampled])
- 
+
 print("after re-sampling...")
 # Display new class counts
 df_upsampled.label.value_counts()
@@ -247,7 +247,7 @@ y_train = []
 for record in train_data:
   x_train.append(record[1:])
   label = int(record[0])
-  y_train.append(label) 
+  y_train.append(label)
 
 x_train = array(x_train)
 x_train = x_train.reshape((len(x_train), 1, len(x_train[0])))
@@ -287,10 +287,10 @@ plt.show()
 x_test = []
 y_test = []
 
-for record in train_data:
+for record in test_data:
   x_test.append(record[1:])
   label = int(record[0])
-  y_test.append(label) 
+  y_test.append(label)
 
 x_test = array(x_test)
 x_test = x_test.reshape((len(x_test), 1, len(x_test[0])))
@@ -299,4 +299,3 @@ test_score = model.evaluate(x_test, y_test)
 print(test_score)
 
 model.save("/content/drive/My Drive/636project/model.h5")
-
