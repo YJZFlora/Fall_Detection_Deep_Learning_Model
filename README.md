@@ -17,8 +17,8 @@ Instruction:
 eg, Fall_Detection_Deep_Learning_Model/samples/bodylandmark/adl-01-cam0
 
 5. run:
-```python3 execute_model <directory of body landmarks for a video>```
+```python3 execute_model.py <directory of body landmarks for a video>```
 
 eg:
-```python3 execute_model Fall_Detection_Deep_Learning_Model/samples/bodylandmark/adl-01-cam0```
+```python3 execute_model.py Fall_Detection_Deep_Learning_Model/samples/bodylandmark/adl-01-cam0```
 
