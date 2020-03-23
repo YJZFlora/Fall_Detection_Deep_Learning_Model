@@ -3,6 +3,7 @@ falling detection model using LSTM
 
 ## How to use the model?
 video demo: https://youtu.be/r2CNC9QNPMg
+
 Instruction:
 1. clone this repository
 2. turn to the directory
