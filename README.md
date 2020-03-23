@@ -15,6 +15,7 @@ Instruction:
 4. get the directory of body landmark json files, copy it. (Some generated body landmark files has been included in /samples
  
 eg, Fall_Detection_Deep_Learning_Model/samples/bodylandmark/adl-01-cam0
+
 5. run:
 ```python3 execute_model <directory of body landmarks for a video>```
 
