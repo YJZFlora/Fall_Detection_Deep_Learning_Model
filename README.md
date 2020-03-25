@@ -1,6 +1,9 @@
 # Fall_Detection_Deep_Learning_Model
 falling detection model using LSTM
 
+## model file
+model.h5
+
 ## How to use the model?
 video demo: https://youtu.be/r2CNC9QNPMg
 
