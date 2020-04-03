@@ -52,21 +52,14 @@ data = sorted(data, key=lambda l:l[-1])
 for d in data:
   d.remove(d[-1])
 
-df = pd.DataFrame.from_records(data)
-csv_path = os.path.join('./', video_landmark_path)
-df.to_csv (r'./data.csv', index = False, header=False)
-
 # use model and write the json file for a video
 print("loading model and computing probability for each frame...")
 model = keras.models.load_model('./model.h5')
 dictionary = {}
 dictionary['falling'] = []
 test = []
-
 # normalize data
-with open('./data.csv', mode='r') as csv_file:
-  reader = csv.reader(csv_file)
-  for record in reader:
+for record in data:
     for i in range(0, 63, 3):
       record[i] = float(record[i])/ 640
       record[i + 1] = float(record[i + 1]) / 480
@@ -89,9 +82,11 @@ json_object = json.dumps(dictionary)
 
 print("complete computing, and the result has been written to json file")
 # Writing to sample.json
-with open("./results/result.json", "w") as outfile:
+with open("./results/result_old_model.json", "w") as outfile:
     outfile.write(json_object)
 
 df = pd.DataFrame(dictionary['falling'])
-df.plot(x=0, y=1)
-plt.savefig('./results/output_plot.png')
+p = df.plot(x=0, y=1, legend=False)
+p.set_xlabel('time')
+p.set_ylabel('probability of fall')
+plt.savefig('./results/output_plot_old_model.png')
