@@ -2,7 +2,9 @@
 falling detection model using LSTM
 
 ## model file
-model.h5
+model_improve_lstm.h5
+model_improve_cnn.h5
+
 
 ## How to use the model?
 video demo: https://youtu.be/r2CNC9QNPMg
