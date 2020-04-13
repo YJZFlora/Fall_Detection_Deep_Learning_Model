@@ -6,6 +6,13 @@ model_improve_lstm.h5
 
 model_improve_cnn.h5
 
+## Performace of models
+
+LSTM model: 
+loss 0.2164  accuracy 0.9047
+
+2D CNN model
+loss 0.1164  accuracy 0.9559
 
 ## How to use the model?
 video demo: https://youtu.be/r2CNC9QNPMg
@@ -19,7 +26,8 @@ Instruction:
 * Tensorflow
 * pandas
 * Numpy
-4. get the directory of body landmark json files, copy it. (Some generated body landmark files has been included in /samples
+4. get the directory of body landmark json files, copy it. (Some generated body landmark files has been included in samples)
+
  
 eg, Fall_Detection_Deep_Learning_Model/samples/bodylandmark/adl-01-cam0
 
