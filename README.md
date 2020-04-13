@@ -1,5 +1,5 @@
 # Fall_Detection_Deep_Learning_Model
-falling detection model using LSTM
+falling detection model using Deep Learning models: LSTM and 2D CNN.
 
 ## model file
 model_improve_lstm.h5
