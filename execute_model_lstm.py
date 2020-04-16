@@ -54,7 +54,7 @@ for d in data:
 
 # use model and write the json file for a video
 print("loading model and computing probability for each frame...")
-model = keras.models.load_model('./model_improve_lstm.h5')
+model = keras.models.load_model('./model_improved_lstm_Apr16.h5')
 dictionary = {}
 dictionary['falling'] = []
 test = []
