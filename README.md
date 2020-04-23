@@ -10,11 +10,11 @@ model_improve_cnn.h5
 
 LSTM model:
 
-loss 0.2164     accuracy 0.9047
+loss 0.1693     accuracy 0.9312
 
 2D CNN model:
 
-loss 0.1164     accuracy 0.9559
+loss 0.0713     accuracy 0.9676
 
 ## How to use the model?
 video demo: https://youtu.be/r2CNC9QNPMg
