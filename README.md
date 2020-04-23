@@ -30,9 +30,10 @@ Instruction:
 * Numpy
 4. generate body landmark json files, copy the directory of it.
 
-I used the open source tool by CMU-Perceptual-Computing-Lab(https://github.com/CMU-Perceptual-Computing-Lab/openpose) to generate body landmark
+I used the open source tool by CMU-Perceptual-Computing-Lab(https://github.com/CMU-Perceptual-Computing-Lab/openpose) to generate body landmark.
 
 Some generated body landmark files has been included in samples directory.
+
 eg, Fall_Detection_Deep_Learning_Model/samples/bodylandmark/adl-01-cam0
 
 5. run:
