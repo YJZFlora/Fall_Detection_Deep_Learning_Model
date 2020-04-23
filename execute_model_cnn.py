@@ -15,6 +15,7 @@ from tensorflow import keras
 from numpy import array
 import matplotlib.pyplot as plt
 import sys
+import numpy as np
 
 # the bodylandmark directory for a vedio
 
@@ -89,6 +90,8 @@ with open("./results/result_cnn.json", "w") as outfile:
 
 df = pd.DataFrame(dictionary['falling'])
 p = df.plot(x=0, y=1, legend=False)
-p.set_xlabel('time')
+p.set_xlabel('Time (in seconds)')
 p.set_ylabel('probability of fall')
+plt.ylim(0.0,1.0)
+plt.xticks(np.arange(0, len(dictionary['falling'])/30, 1))
 plt.savefig('./results/output_plot_cnn.png')

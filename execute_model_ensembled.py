@@ -18,7 +18,6 @@ import sys
 import numpy as np
 
 # the bodylandmark directory for a vedio
-
 video_landmark_path = sys.argv[1]
 
 data = []
@@ -55,27 +54,37 @@ for d in data:
 
 # use model and write the json file for a video
 print("loading model and computing probability for each frame...")
-model = keras.models.load_model('./model_improved_lstm_Apr16.h5')
+cnn_model = keras.models.load_model('./model_improved_cnn_Apr16.h5')
+lstm_model = keras.models.load_model('./model_improved_lstm_Apr16.h5')
 dictionary = {}
 dictionary['falling'] = []
-test = []
+test_cnn = []
+test_lstm = []
 
 # normalize data
 for record in data:
     for i in range(0, 63, 3):
       record[i] = float(record[i])/ 640
       record[i + 1] = float(record[i + 1]) / 480
-    test.append(record)
+    test_cnn.append(record)
+    test_lstm.append(record)
 
 
-test = array(test)
-test = test.reshape((len(test), 1, len(test[0])))
-probality = model.predict_proba(test)
+# for cnn model, reshape and predict
+test_cnn = array(test_cnn)
+test_cnn = test_cnn.reshape((len(test_cnn), 3, int(len(test_cnn[0])/3), 1))
+probability_cnn = cnn_model.predict_proba(test_cnn)
 
+# for lstm model, reshape and predict
+test_lstm = array(test_lstm)
+test_lstm = test_lstm.reshape((len(test_lstm), 1, len(test_lstm[0])))
+probability_lstm = lstm_model.predict_proba(test_lstm)
+
+# emsemble the prediction of cnn and lstm model
 frame_num = 0
-for i in range(len(probality)):
+for i in range(len(probability_cnn)):
     timestamp = frame_num / 30
-    probability_fall = float(probality[i][0])
+    probability_fall = float(probability_cnn[i][0]) * 0.8 + float(probability_lstm[i][0]) * 0.2
     to_add = [timestamp, probability_fall]
     dictionary['falling'].append(to_add)
     frame_num +=1
@@ -85,7 +94,7 @@ json_object = json.dumps(dictionary)
 
 print("complete computing, and the result has been written to json file")
 # Writing to sample.json
-with open("./results/result_lstm.json", "w") as outfile:
+with open("./results/final_result.json", "w") as outfile:
     outfile.write(json_object)
 
 df = pd.DataFrame(dictionary['falling'])
@@ -94,4 +103,4 @@ p.set_xlabel('Time (in seconds)')
 p.set_ylabel('probability of fall')
 plt.xticks(np.arange(0, len(dictionary['falling'])/30, 1))
 plt.ylim(0.0,1.0)
-plt.savefig('./results/output_plot_lstm.png')
+plt.savefig('./results/ensembled_output_plot.png')
