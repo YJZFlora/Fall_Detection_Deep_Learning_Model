@@ -1,0 +1,17 @@
+Please follow the following steps to use Openpose in Google Colab:
+1. Install openpose:
+	Copy the commands in `install_openpose.txt` into a Code cell in Google Colab and execute. This will clone the Openpose source code and build it.
+
+2. Update script:
+	Update the `base_dir` variable in the `extract_landmark.py` file; this should contain the path to the directory containing your video files in Google Colab.
+	
+3. Execute script:
+	Upload the `extract_landmark.py` script into the openpose directory. You can now run `python extract_landmark.py` command from the openpose directory.
+	
+The `extract_landmark.py` script will create a new folder for each video file inside the base directory. It dumps the extracted landmarks (as JSON files) for each frame of the video into these folders.
+	
+
+Notes:
+1. Set the Hardware Accelaraor as GPU. This can be updated by clicking Runtime > Change Runtime Type.
+2. By default, the `extract_landmark.py` script extracts pose, face, and hand features. You can change this by updating the `cmd_str` variable.
+3. Save the generated files into your local machine or in Google Drive. They will get wiped when the Colab session terminates.
