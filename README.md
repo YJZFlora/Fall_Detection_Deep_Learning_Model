@@ -45,20 +45,26 @@ Execute CNN model:
 ```python3 execute_model_cnn.py <directory of body landmarks for a video>```
 
 Execute emsembled model:
-``` python3 execute_ensembled_model.py <directory of body landmarks for a video>```
+``` python3 execute_model_ensembled.py <directory of body landmarks for a video>```
 
 eg:
-```python3 execute_ensembled_model.py /samples/bodylandmark/adl-01-cam0```
+```python3 execute_model_ensembled.py ./samples/bodylandmark/adl-01-cam0```
 
 6. Result files
 
+Ensembled model:
+./results/timeLabel.json
+./results/timeLabel.png
+
 LSTM model:
-./result/result_lstm.json
+./results/timeLabel_lstm.json
+./results/timeLabel_lstm.png
+
 
 CNN model:
-./result/result_cnn.json
+./results/timeLabel_cnn.json
+./results/timeLabel_cnn.png
 
-emsembled model:
-./result/final_result.json
+
 
 And in each pair in the file, such as [2.721365,0.23445825932504438], the first number is the time, and the second number is the value of the label your binary-classification model predicts. So the above example shows that at 2.721365 second in the video, the label predicted by your binary-classification model changes to 0.23445825932504438.)

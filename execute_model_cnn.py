@@ -85,7 +85,7 @@ json_object = json.dumps(dictionary)
 
 print("complete computing, and the result has been written to json file")
 # Writing to sample.json
-with open("./results/result_cnn.json", "w") as outfile:
+with open("./results/timeLabel_cnn.json", "w") as outfile:
     outfile.write(json_object)
 
 df = pd.DataFrame(dictionary['falling'])
@@ -94,4 +94,4 @@ p.set_xlabel('Time (in seconds)')
 p.set_ylabel('Probability of fall')
 plt.ylim(0.0,1.0)
 plt.xticks(np.arange(0, len(dictionary['falling'])/30, 1))
-plt.savefig('./results/output_plot_cnn.png')
+plt.savefig('./results/timeLabel_cnn.png')
