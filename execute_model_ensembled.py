@@ -54,8 +54,8 @@ for d in data:
 
 # use model and write the json file for a video
 print("loading model and computing probability for each frame...")
-cnn_model = keras.models.load_model('./model_improved_cnn_Apr16.h5')
-lstm_model = keras.models.load_model('./model_improved_lstm_Apr16.h5')
+cnn_model = keras.models.load_model('./model_improved_cnn_Apr29.h5')
+lstm_model = keras.models.load_model('./model_improved_lstm_Apr29.h5')
 dictionary = {}
 dictionary['falling'] = []
 test_cnn = []
@@ -98,7 +98,7 @@ with open("./results/timeLabel.json", "w") as outfile:
     outfile.write(json_object)
 
 df = pd.DataFrame(dictionary['falling'])
-p = df.plot(x=0, y=1, legend=False)
+p = df.plot(x=0, y=1, legend=False, linewidth=2.0)
 p.set_xlabel('Time (in seconds)')
 p.set_ylabel('probability of fall')
 plt.xticks(np.arange(0, len(dictionary['falling'])/30, 1))
