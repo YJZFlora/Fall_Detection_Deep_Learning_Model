@@ -41,17 +41,19 @@ eg, Fall_Detection_Deep_Learning_Model/samples/bodylandmark/test_case1
 
 5. Run one of the following scripts:
 
+The file name or directory name should not include under_score "_"
+
 Execute emsembled model:
-``` python3 execute_model_ensembled.py <directory of body landmarks for a video>```
+``` python3 execute_model_ensembled.py <width of the video> <height of the video> <directory of body landmarks for a video>```
 
 Execute new LSTM model:
-```python3 execute_model_lstm.py <directory of body landmarks for a video>```
+```python3 execute_model_lstm.py <width of the video> <height of the video> <directory of body landmarks for a video>```
 
 Execute CNN model:
-```python3 execute_model_cnn.py <directory of body landmarks for a video>```
+```python3 execute_model_cnn.py <width of the video> <height of the video> <directory of body landmarks for a video>```
 
 eg:
-```python3 execute_model_ensembled.py ./samples/bodylandmark/test_case3```
+```python3 execute_model_ensembled.py 640 360 ./test/1800-3```
 
 6. Result files
 

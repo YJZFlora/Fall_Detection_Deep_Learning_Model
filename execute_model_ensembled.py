@@ -18,7 +18,9 @@ import sys
 import numpy as np
 
 # the bodylandmark directory for a vedio
-video_landmark_path = sys.argv[1]
+width = sys.argv[1]
+height = sys.argv[2]
+video_landmark_path = sys.argv[3]
 
 data = []
 
@@ -54,8 +56,8 @@ for d in data:
 
 # use model and write the json file for a video
 print("loading model and computing probability for each frame...")
-cnn_model = keras.models.load_model('./model_improved_cnn_Apr29.h5')
-lstm_model = keras.models.load_model('./model_improved_lstm_Apr29.h5')
+cnn_model = keras.models.load_model('./final_cnn_model.h5')
+lstm_model = keras.models.load_model('./final_lstm_model.h5')
 dictionary = {}
 dictionary['falling'] = []
 test_cnn = []
@@ -64,8 +66,8 @@ test_lstm = []
 # normalize data
 for record in data:
     for i in range(0, 63, 3):
-      record[i] = float(record[i])/ 640
-      record[i + 1] = float(record[i + 1]) / 480
+      record[i] = float(record[i])/ float(width)
+      record[i + 1] = float(record[i + 1]) / float(height)
     test_cnn.append(record)
     test_lstm.append(record)
 
@@ -98,9 +100,9 @@ with open("./results/timeLabel.json", "w") as outfile:
     outfile.write(json_object)
 
 df = pd.DataFrame(dictionary['falling'])
-p = df.plot(x=0, y=1, legend=False, linewidth=2.0)
+p = df.plot(x=0, y=1, legend=False)
 p.set_xlabel('Time (in seconds)')
 p.set_ylabel('probability of fall')
 plt.xticks(np.arange(0, len(dictionary['falling'])/30, 1))
-plt.ylim(0.0,1.0)
+plt.ylim(-0.1,1.1)
 plt.savefig('./results/timeLabel.png')
