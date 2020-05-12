@@ -74,4 +74,5 @@ CNN model:
 And in each pair in the file, such as [2.721365,0.23445825932504438], the first number is the time, and the second number is the value of the label your binary-classification model predicts. So the above example shows that at 2.721365 second in the video, the label predicted by your binary-classification model changes to 0.23445825932504438.)
 
 7. Problem
+
 Not enough training video.
